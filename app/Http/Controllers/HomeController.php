@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use PhpParser\Mode\Expr\New_;
 
 class HomeController extends Controller
 {
@@ -24,17 +26,31 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function detaill (Mahasiswa $mahasiswa)
+    {
+        // dd($mahasiswa);
+        $org = Organization::all();
+        return view('editmhs', compact('mahasiswa', 'org'));
+    }
+    public function update (Mahasiswa $mahasiswa)
+    {
+        $mhs = request()->all();
+        // dd($mhs);
+        $mahasiswa->update($mhs);
+        return back();
+    }
+    public function delete(Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->delete();
+        return redirect('/list');
+    }
     public function index()
     {
         return view('dashboard');
     }
-    public function detail()
-    {
-        return view('detail');
-    }
     public function list()
     {
-        $mahasiswa = Mahasiswa::all();
+        $mahasiswa = Mahasiswa::paginate(5);
         // dd($mahasiswa);
         return view('list', compact('mahasiswa'));
     }
@@ -44,9 +60,23 @@ class HomeController extends Controller
         // dd('$Dosen');
         return view('Dosen', compact('Dosen'));
     }
-    public function organization()
+    public function create()
     {
-        $organization = Organization::all();
-         dd($organization);
+        $org = Organization::all();
+        return view('createmhs', compact('org'));
+    }
+    public function store(Request $request)
+    {
+        $post = new Mahasiswa;
+         
+        $post->organization_id = $request->organization_id;
+        $post->name = $request->name; 
+        $post->npm = $request->npm; 
+        $post->slug = Str::slug($request->npm); 
+        $post->class = $request->class; 
+        $post->alamat = $request->alamat; 
+
+        $post->save();
+        return redirect('/list');
     }
 }

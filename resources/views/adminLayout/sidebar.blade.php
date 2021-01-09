@@ -35,20 +35,17 @@
                      </form>
                 </li>
                
-               <li class="nav-item active">
-                <a class="dropdown-item {{request() -> is('detail') ?'active' : ''}}" href="{{route('detail')}}">
-                    detail</a>   
-               </li>
+              
                <li class="nav-item active">
                 <a class="dropdown-item {{request() -> is('list') ?'active' : ''}}" href="{{route('list')}}">
-                    list mahasiswa</a>   
+                    list Mahasiswa</a>   
                </li>
                <li class="nav-item active">
                 <a class="dropdown-item {{request() -> is('Dosen') ?'active' : ''}}" href="{{route('Dosen')}}">
-                    list dosen</a>   
+                    list Dosen</a>   
                </li>
                <li class="nav-item active">
-                <a class="dropdown-item {{request() -> is('organisasi') ?'active' : ''}}" href="{{route('organisasi')}}">
+                <a class="dropdown-item {{request() -> is('organization') ?'active' : ''}}" href="{{route('organization')}}">
                     list Organisasi</a>   
                </li>
         </ul>

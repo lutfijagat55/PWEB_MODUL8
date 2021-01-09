@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Mahasiswa;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MahasiswaFactory extends Factory
@@ -22,10 +23,11 @@ class MahasiswaFactory extends Factory
     public function definition()
     {
         return [
+            'organization_id' => $this->faker->randomElement(['1', '2']),
             'npm' => $this->faker->numberBetween(187006010, 187006011),
             'name' => $this->faker->name,
+            'slug' => Str::slug($this->faker->sentence()),
             'class' => $this->faker->randomElement(['a', 'b', 'c']),
-            'organization' => $this->faker->randomElement(['himpunan', 'BEM FAKULTAS', 'BEM UNIVERSITAS']),
             'alamat' => $this->faker->address,
         ];
     }

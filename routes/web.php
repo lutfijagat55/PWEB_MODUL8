@@ -22,10 +22,14 @@ Route::get('/index', function () {
 Route::get('/master', function () {
     return view('master');
 });
-Route::get('/detail', [HomeController::class, 'detail'])->name('detail');
 Route::get('/list', [HomeController::class, 'list'])->name('list');
+Route::get('list/detaill/{mahasiswa:slug}', [HomeController::class, 'detaill']);
+Route::patch('list/update/{mahasiswa:slug}', [HomeController::class, 'update']);
+Route::delete('list/delete/{mahasiswa:slug}', [HomeController::class, 'delete']);
 Route::get('/Dosen', [HomeController::class, 'Dosen'])->name('Dosen');
-Route::get('/organization', [HomeController::class, 'organization'])->name('organization');
+Route::get('/createmhs', [HomeController::class, 'create']);
+Route::post('/store', [HomeController::class, 'store']);
+Route::get('/organisasi', [HomeController::class, 'organization'])->name('organization');
 
 Auth::routes();
 
